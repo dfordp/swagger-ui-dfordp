@@ -1,5 +1,6 @@
 import React from "react"
-import { mount } from "enzyme"
+import { render, screen } from "@testing-library/react"
+import "@testing-library/jest-dom" 
 import FilterContainer from "core/containers/filter"
 import { Col } from "core/components/layout-utils"
 
@@ -23,11 +24,11 @@ describe("<FilterContainer/>", function(){
     props.layoutSelectors.currentFilter = function() {return true}
 
     // When
-    let wrapper = mount(<FilterContainer {...props}/>)
+    render(<FilterContainer {...props}/>)
 
     // Then
-    const renderedColInsideFilter = wrapper.find(Col)
-    expect(renderedColInsideFilter.length).toEqual(1)
+    const renderedColInsideFilter = screen.queryByTestId("filter-col")
+    expect(renderedColInsideFilter).toBeInTheDocument()
   })
 
   it("does not render FilterContainer if filter is false", function(){
@@ -41,7 +42,7 @@ describe("<FilterContainer/>", function(){
     let wrapper = mount(<FilterContainer {...props}/>)
 
     // Then
-    const renderedColInsideFilter = wrapper.find(Col)
-    expect(renderedColInsideFilter.length).toEqual(0)
+    const renderedColInsideFilter = screen.queryByTestId("filter-col")
+    expect(renderedColInsideFilter).not.toBeInTheDocument()
   })
 })

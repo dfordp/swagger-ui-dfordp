@@ -1,5 +1,6 @@
 import React from "react"
-import { shallow } from "enzyme"
+import { render ,screen} from "@testing-library/react"
+import "@testing-library/jest-dom"
 import ResponseBody from "core/components/response-body"
 
 describe("<ResponseBody />", function () {
